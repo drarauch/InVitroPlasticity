@@ -6,21 +6,20 @@ TiCoNE <- read.delim("TiCoNE_RefSeqID_cluster.txt")
   
 ### Figure 2B
 # Barplots for gene of interest (GOI)
+library(DESeq2)
+library(ggpubr)
 
-#Find Ref-seq ID's of GOI 
-ALPL <- RNA_tbl[grep('ALPL\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-LMCD1 <- RNA_tbl[grep('LMCD1\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-PLIN1 <- RNA_tbl[grep('PLIN1\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-ADIPOQ <- RNA_tbl[grep('ADIPOQ\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-
-#Determine gene counts of GOI in each sample and do the barplot
-gene <- ALPL #(Otherwise LMCD1, PLIN1 or ADIPOQ)
-gene <- RNA_tbl[RNA_tbl$RefSeqID.x == gene,'RefSeqID.x']
-intgroup = "Group"
-counts <-plotCounts(dds_mrg,gene,intgroup, returnData = TRUE)
-counts$Group <- factor(counts$Group, levels=c("7dOb_4dAd", "7dOb", "3dOb", "1dOb", "4hOb", "Msc","4hAd", "1dAd", "3dAd", "7dAd", "7dAd_4dOb"))
-counts <- na.omit(counts)
-ggbarplot(counts, x="Group", y="count", main = "GOI", add = c("mean_se", "jitter"))
+# Define GOI
+GOI <- c('ALPL','LMCD1','PLIN1','ADIPOQ','ENG','LEPR','THY1')
+for (i in 1 : length(GOI)){
+  intgroup = "Group"
+  gene <- RNA_tbl[RNA_tbl$Symbol == GOI[i],'RefSeqID.x']
+  counts <-plotCounts(dds_mrg,gene,intgroup, returnData = TRUE)
+  counts$Group <- factor(counts$Group, levels=c("7dOb_4dAd", "7dOb", "3dOb", "1dOb", "4hOb", "Msc","4hAd", "1dAd", "3dAd", "7dAd", "7dAd_4dOb"))
+  counts <- na.omit(counts)
+  p <- ggbarplot(counts, x="Group", y="count", main = GOI[i], add = c("mean_se", "jitter"))
+  print(p)
+}
 
 # Final aesthetics were done in Illustrator
 
