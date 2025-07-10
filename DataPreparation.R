@@ -97,7 +97,7 @@ Raw_Diff <- Raw_Diff[apply(Raw_Diff[,9:41],1,max)> 2,]
 Raw_MeCh <- Raw_MeCh[apply(Raw_MeCh[,9:20],1,max)> 2,]
 
 #Merging files using Symbol instead of RefSeqID
-Raw_mrg <- merge(Raw_Diff, Raw_MeCh, by = "Symbol")
+Raw_mrg <- merge(Raw_Diff, Raw_MeCh[,9:20], by = "Symbol")
 
 #Running the DESeq
 row.names(Raw_mrg) <- Raw_mrg$RefSeqID.x
