@@ -129,6 +129,10 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[5],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[5],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[5],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[5],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[5],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[5],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[5],
                  
                  as.data.frame(results(dds_mrg, contrast = c("Group", "14dOb", "Msc")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb", "Msc")))[6],
@@ -148,7 +152,10 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "Msc")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[6],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[6],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[6],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[6],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[6],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[6],
                  
                  as.data.frame(results(dds_mrg, contrast = c("Group", "14dOb", "Msc")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb", "Msc")))[2],
@@ -168,21 +175,24 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "Msc")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[2],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[2])
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[2],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[2],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[2],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[2])
 
 #Naming the columns of comparison
 names(RNA_tbl)[9:65] <- c("pval_14dOb_vs_Msc","pval_7dOb_vs_Msc","pval_3dOb_vs_Msc","pval_1dOb_vs_Msc","pval_4hOb_vs_Msc",
                           "pval_4hAd_vs_Msc", "pval_1dAd_vs_Msc","pval_3dAd_vs_Msc","pval_7dAd_vs_Msc","pval_14dAd_vs_Msc",
                           "pval_3dOb_4dAd_vs_Msc","pval_3dAd_4dOb_vs_Msc","pval_3dOb_4dAd_4dOb_vs_Msc","pval_3dAd_4dOb_4dAd_vs_Msc",
-                          "pval_7dOb_4dAd_vs_Msc","pval_7dAd_4dOb_vs_Msc", "pval_7dOb_4dAd_vs_7dOb","pval_7dAd_4dOb_vs_7dAd","pval_7dOb_4dAd_vs_3dAd",
+                          "pval_7dOb_4dAd_vs_Msc","pval_7dAd_4dOb_vs_Msc", "pval_7dOb_4dAd_vs_7dOb","pval_7dAd_4dOb_vs_7dAd","pval_3dAd_4dOb_vs_3dAd","pval_3dOb_4dAd_vs_3dOb","pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb","pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd",
                           "padj_14dOb_vs_Msc","padj_7dOb_vs_Msc","padj_3dOb_vs_Msc","padj_1dOb_vs_Msc","padj_4hOb_vs_Msc",
                           "padj_4hAd_vs_Msc", "padj_1dAd_vs_Msc","padj_3dAd_vs_Msc","padj_7dAd_vs_Msc","padj_14dAd_vs_Msc",
                           "padj_3dOb_4dAd_vs_Msc","padj_3dAd_4dOb_vs_Msc","padj_3dOb_4dAd_4dOb_vs_Msc","padj_3dAd_4dOb_4dAd_vs_Msc",
-                          "padj_7dOb_4dAd_vs_Msc","padj_7dAd_4dOb_vs_Msc", "padj_7dOb_4dAd_vs_7dOb","padj_7dAd_4dOb_vs_7dAd","padj_7dOb_4dAd_vs_3dAd",
+                          "padj_7dOb_4dAd_vs_Msc","padj_7dAd_4dOb_vs_Msc", "padj_7dOb_4dAd_vs_7dOb","padj_7dAd_4dOb_vs_7dAd","padj_3dAd_4dOb_vs_3dAd","padj_3dOb_4dAd_vs_3dOb","padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb","padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd",
                           "logFC_14dOb_vs_Msc","logFC_7dOb_vs_Msc","logFC_3dOb_vs_Msc","logFC_1dOb_vs_Msc","logFC_4hOb_vs_Msc",
                           "logFC_4hAd_vs_Msc", "logFC_1dAd_vs_Msc","logFC_3dAd_vs_Msc","logFC_7dAd_vs_Msc","logFC_14dAd_vs_Msc",
                           "logFC_3dOb_4dAd_vs_Msc","logFC_3dAd_4dOb_vs_Msc","logFC_3dOb_4dAd_4dOb_vs_Msc","logFC_3dAd_4dOb_4dAd_vs_Msc",
-                          "logFC_7dOb_4dAd_vs_Msc","logFC_7dAd_4dOb_vs_Msc", "logFC_7dOb_4dAd_vs_7dOb","logFC_7dAd_4dOb_vs_7dAd","logFC_7dOb_4dAd_vs_3dAd")
+                          "logFC_7dOb_4dAd_vs_Msc","logFC_7dAd_4dOb_vs_Msc", "logFC_7dOb_4dAd_vs_7dOb","logFC_7dAd_4dOb_vs_7dAd","logFC_3dAd_4dOb_vs_3dAd","logFC_3dOb_4dAd_vs_3dOb","logFC_3dAd_4dOb_4dAd_vs_3dAd_4dOb","logFC_3dOb_4dAd_4dOb_vs_3dOb_4dAd")
 
 #Changing NA values into 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_14dOb_vs_Msc), "pval_14dOb_vs_Msc"] <- 1
@@ -202,8 +212,11 @@ RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_4dAd_vs_Msc), "pval_3dAd_4dOb_4dA
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_Msc), "pval_7dOb_4dAd_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dAd_4dOb_vs_Msc), "pval_7dAd_4dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_7dOb), "pval_7dOb_4dAd_vs_7dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_3dAd), "pval_7dOb_4dAd_vs_3dAd"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dAd_4dOb_vs_7dAd), "pval_7dAd_4dOb_vs_7dAd"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_vs_3dAd), "pval_3dAd_4dOb_vs_3dAd"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$pval_3dOb_4dAd_vs_3dOb), "pval_3dOb_4dAd_vs_3dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb), "pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd), "pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd"] <- 1
 
 RNA_tbl[!complete.cases(RNA_tbl$padj_14dOb_vs_Msc), "padj_14dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_vs_Msc), "padj_7dOb_vs_Msc"] <- 1
@@ -222,9 +235,12 @@ RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_4dAd_vs_Msc), "padj_3dAd_4dOb_4dA
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_Msc), "padj_7dOb_4dAd_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dAd_4dOb_vs_Msc), "padj_7dAd_4dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_7dOb), "padj_7dOb_4dAd_vs_7dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_3dAd), "padj_7dOb_4dAd_vs_3dAd"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dAd_4dOb_vs_7dAd), "padj_7dAd_4dOb_vs_7dAd"] <- 1
-#saveRDS(RNA_tbl, "RNA_tbl3.Rds")
+RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_vs_3dAd), "padj_3dAd_4dOb_vs_3dAd"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$padj_3dOb_4dAd_vs_3dOb), "padj_3dOb_4dAd_vs_3dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb), "padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd), "padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd"] <- 1
+#saveRDS(RNA_tbl, "RNA_tbl.Rds")
 
   ### scRNA RNA seq seurat object
 ## Import count objects generated using zUMIs
