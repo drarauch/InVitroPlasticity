@@ -1,7 +1,7 @@
 ### Figure 5
 # load the following objects (see XX for more information on how these were generated)
 dds_mrg <- readRDS("dds_mrg.Rds")
-RNA_tbl <- readRDS("RNA_tbl3.Rds")
+RNA_tbl <- readRDS("RNA_tbl.Rds")
 
 ### Figure 5B
 # PCA plot of normal diff up to day 7 and changing media at day 3 of Diff
@@ -89,20 +89,23 @@ for(i in c(5,9,1)) {
 
 ### Figure 5D
 # Barplots for gene of interest (GOI)
-library(DESeq2)
 library(ggpubr)
+library(DESeq2)
 
-#Find Ref-seq ID's of GOI 
-ALPL <- RNA_tbl[grep('ALPL\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-LMCD1 <- RNA_tbl[grep('LMCD1\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-PLIN1 <- RNA_tbl[grep('PLIN1\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
-ADIPOQ <- RNA_tbl[grep('ADIPOQ\\|',RNA_tbl$Annotation.Divergence.x),'RefSeqID.x']
+# Define GOI
+GOI <- c('ALPL','LMCD1','PLIN1','ADIPOQ','ENG','LEPR','THY1')
+for (i in 1 : length(GOI)){
+  intgroup = "Group"
+  gene <- RNA_tbl[RNA_tbl$Symbol == GOI[i],'RefSeqID']
+  counts <-plotCounts(dds_mrg,gene,intgroup, returnData = TRUE)
+  counts$Group <- factor(counts$Group, levels=c("3dOb_4dAd_4dOb", "3dOb_4dAd", "3dOb", "Msc", "3dAd", "3dAd_4dOb","3dAd_4dOb_4dAd"))
+  counts <- na.omit(counts)
+  p <- ggbarplot(counts, x="Group", y="count", main = GOI[i], add = c("mean_se", "jitter"))
+  print(p)
+  #Extract p-values
+  print(paste(GOI[i],":",RNA_tbl[RNA_tbl$Symbol==GOI[i],c("padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd","padj_3dOb_4dAd_vs_3dOb","padj_3dOb_vs_Msc","padj_3dAd_vs_Msc","padj_3dAd_4dOb_vs_3dAd","padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb")]))
+}
 
-#Determine gene counts of GOI in each sample and do the barplot
-gene <- ALPL #(Otherwise LMCD1, PLIN1 or ADIPOQ)
-gene <- RNA_tbl[RNA_tbl$RefSeqID.x == gene,'RefSeqID.x']
-intgroup = "Group"
-counts <-plotCounts(dds_mrg,gene,intgroup, returnData = TRUE)
-counts$Group <- factor(counts$Group, levels=c("3dOb_4dAd_4dOb", "3dOb_4dAd", "3dOb", "Msc", "3dAd", "3dAd_4dOb","3dAd_4dOb_4dAd"))
-counts <- na.omit(counts)
-ggbarplot(counts, x="Group", y="count", main = "GOI", add = c("mean_se", "jitter"))
+#Extract p-values
+
+

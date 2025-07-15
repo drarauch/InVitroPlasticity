@@ -1,24 +1,27 @@
 ### Figure 2
 # load the following objects from https://osf.io/c84vs/
 dds_mrg <- readRDS("dds_mrg.Rds")
-RNA_tbl <- readRDS("RNA_tbl3.Rds")
+RNA_tbl <- readRDS("RNA_tbl.Rds")
 TiCoNE <- read.delim("TiCoNE_RefSeqID_cluster.txt")
   
 ### Figure 2B
 # Barplots for gene of interest (GOI)
-library(DESeq2)
 library(ggpubr)
+library(DESeq2)
 
 # Define GOI
 GOI <- c('ALPL','LMCD1','PLIN1','ADIPOQ','ENG','LEPR','THY1')
 for (i in 1 : length(GOI)){
   intgroup = "Group"
-  gene <- RNA_tbl[RNA_tbl$Symbol == GOI[i],'RefSeqID.x']
+  gene <- RNA_tbl[RNA_tbl$Symbol == GOI[i],'RefSeqID']
   counts <-plotCounts(dds_mrg,gene,intgroup, returnData = TRUE)
   counts$Group <- factor(counts$Group, levels=c("7dOb_4dAd", "7dOb", "3dOb", "1dOb", "4hOb", "Msc","4hAd", "1dAd", "3dAd", "7dAd", "7dAd_4dOb"))
   counts <- na.omit(counts)
   p <- ggbarplot(counts, x="Group", y="count", main = GOI[i], add = c("mean_se", "jitter"))
   print(p)
+  #Extract p-values
+  print(paste(GOI[i],":",RNA_tbl[RNA_tbl$Symbol==GOI[i],c("padj_7dOb_4dAd_vs_7dOb","padj_7dOb_vs_Msc","padj_7dAd_vs_Msc","padj_7dAd_4dOb_vs_7dAd")]))
+  
 }
 
 # Final aesthetics were done in Illustrator
