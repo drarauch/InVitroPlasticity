@@ -181,7 +181,7 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[2])
 
 #Naming the columns of comparison
-names(RNA_tbl)[9:65] <- c("pval_14dOb_vs_Msc","pval_7dOb_vs_Msc","pval_3dOb_vs_Msc","pval_1dOb_vs_Msc","pval_4hOb_vs_Msc",
+names(RNA_tbl)[9:74] <- c("pval_14dOb_vs_Msc","pval_7dOb_vs_Msc","pval_3dOb_vs_Msc","pval_1dOb_vs_Msc","pval_4hOb_vs_Msc",
                           "pval_4hAd_vs_Msc", "pval_1dAd_vs_Msc","pval_3dAd_vs_Msc","pval_7dAd_vs_Msc","pval_14dAd_vs_Msc",
                           "pval_3dOb_4dAd_vs_Msc","pval_3dAd_4dOb_vs_Msc","pval_3dOb_4dAd_4dOb_vs_Msc","pval_3dAd_4dOb_4dAd_vs_Msc",
                           "pval_7dOb_4dAd_vs_Msc","pval_7dAd_4dOb_vs_Msc", "pval_7dOb_4dAd_vs_7dOb","pval_7dAd_4dOb_vs_7dAd","pval_3dAd_4dOb_vs_3dAd","pval_3dOb_4dAd_vs_3dOb","pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb","pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd",
