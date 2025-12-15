@@ -602,7 +602,7 @@ Ob_Smooth <- Ob_Smooth[help,]
 # Generate PCA environment with bulk RNA-seq data 
 pca <- prcomp(t(t(scale(t(Ob)))), scale.=F)
 
-# center and scale scRNA-seq samples based on existing PCA
+# center and scale bulk RNA-seq samples based on existing PCA
 object2 <- scale(t(Ob_Smooth), center = pca$center, scale = pca$scale)
 projected_scores2 <- object2 %*% pca$rotation
 

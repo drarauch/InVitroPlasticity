@@ -106,6 +106,5 @@ for (i in 1 : length(GOI)){
   print(paste(GOI[i],":",RNA_tbl[RNA_tbl$Symbol==GOI[i],c("padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd","padj_3dOb_4dAd_vs_3dOb","padj_3dOb_vs_Msc","padj_3dAd_vs_Msc","padj_3dAd_4dOb_vs_3dAd","padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb")]))
 }
 
-#Extract p-values
 
 

@@ -97,7 +97,7 @@ Raw_Diff <- Raw_Diff[apply(Raw_Diff[,9:41],1,max)> 2,]
 Raw_MeCh <- Raw_MeCh[apply(Raw_MeCh[,9:20],1,max)> 2,]
 
 #Merging files using Symbol instead of RefSeqID
-Raw_mrg <- merge(Raw_Diff, Raw_MeCh[,9:20], by = "Symbol")
+Raw_mrg <- merge(Raw_Diff, Raw_MeCh, by = "Symbol")
 
 #Running the DESeq
 row.names(Raw_mrg) <- Raw_mrg$RefSeqID.x
@@ -128,10 +128,7 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "Msc")))[5],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[5],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[5],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[5],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[5],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[5],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[5],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[5],
                  
                  as.data.frame(results(dds_mrg, contrast = c("Group", "14dOb", "Msc")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb", "Msc")))[6],
@@ -151,10 +148,7 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "Msc")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[6],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[6],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[6],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[6],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[6],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[6],
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[6],
                  
                  as.data.frame(results(dds_mrg, contrast = c("Group", "14dOb", "Msc")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb", "Msc")))[2],
@@ -174,24 +168,21 @@ RNA_tbl <- cbind(RNA_tbl,
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "Msc")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "7dOb")))[2],
                  as.data.frame(results(dds_mrg, contrast = c("Group", "7dAd_4dOb", "7dAd")))[2],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb", "3dAd")))[2],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd", "3dOb")))[2],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dAd_4dOb_4dAd", "3dAd_4dOb")))[2],
-                 as.data.frame(results(dds_mrg, contrast = c("Group", "3dOb_4dAd_4dOb", "3dOb_4dAd")))[2])
+                 as.data.frame(results(dds_mrg, contrast = c("Group", "7dOb_4dAd", "3dAd")))[2])
 
 #Naming the columns of comparison
-names(RNA_tbl)[9:74] <- c("pval_14dOb_vs_Msc","pval_7dOb_vs_Msc","pval_3dOb_vs_Msc","pval_1dOb_vs_Msc","pval_4hOb_vs_Msc",
+names(RNA_tbl)[9:65] <- c("pval_14dOb_vs_Msc","pval_7dOb_vs_Msc","pval_3dOb_vs_Msc","pval_1dOb_vs_Msc","pval_4hOb_vs_Msc",
                           "pval_4hAd_vs_Msc", "pval_1dAd_vs_Msc","pval_3dAd_vs_Msc","pval_7dAd_vs_Msc","pval_14dAd_vs_Msc",
                           "pval_3dOb_4dAd_vs_Msc","pval_3dAd_4dOb_vs_Msc","pval_3dOb_4dAd_4dOb_vs_Msc","pval_3dAd_4dOb_4dAd_vs_Msc",
-                          "pval_7dOb_4dAd_vs_Msc","pval_7dAd_4dOb_vs_Msc", "pval_7dOb_4dAd_vs_7dOb","pval_7dAd_4dOb_vs_7dAd","pval_3dAd_4dOb_vs_3dAd","pval_3dOb_4dAd_vs_3dOb","pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb","pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd",
+                          "pval_7dOb_4dAd_vs_Msc","pval_7dAd_4dOb_vs_Msc", "pval_7dOb_4dAd_vs_7dOb","pval_7dAd_4dOb_vs_7dAd","pval_7dOb_4dAd_vs_3dAd",
                           "padj_14dOb_vs_Msc","padj_7dOb_vs_Msc","padj_3dOb_vs_Msc","padj_1dOb_vs_Msc","padj_4hOb_vs_Msc",
                           "padj_4hAd_vs_Msc", "padj_1dAd_vs_Msc","padj_3dAd_vs_Msc","padj_7dAd_vs_Msc","padj_14dAd_vs_Msc",
                           "padj_3dOb_4dAd_vs_Msc","padj_3dAd_4dOb_vs_Msc","padj_3dOb_4dAd_4dOb_vs_Msc","padj_3dAd_4dOb_4dAd_vs_Msc",
-                          "padj_7dOb_4dAd_vs_Msc","padj_7dAd_4dOb_vs_Msc", "padj_7dOb_4dAd_vs_7dOb","padj_7dAd_4dOb_vs_7dAd","padj_3dAd_4dOb_vs_3dAd","padj_3dOb_4dAd_vs_3dOb","padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb","padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd",
+                          "padj_7dOb_4dAd_vs_Msc","padj_7dAd_4dOb_vs_Msc", "padj_7dOb_4dAd_vs_7dOb","padj_7dAd_4dOb_vs_7dAd","padj_7dOb_4dAd_vs_3dAd",
                           "logFC_14dOb_vs_Msc","logFC_7dOb_vs_Msc","logFC_3dOb_vs_Msc","logFC_1dOb_vs_Msc","logFC_4hOb_vs_Msc",
                           "logFC_4hAd_vs_Msc", "logFC_1dAd_vs_Msc","logFC_3dAd_vs_Msc","logFC_7dAd_vs_Msc","logFC_14dAd_vs_Msc",
                           "logFC_3dOb_4dAd_vs_Msc","logFC_3dAd_4dOb_vs_Msc","logFC_3dOb_4dAd_4dOb_vs_Msc","logFC_3dAd_4dOb_4dAd_vs_Msc",
-                          "logFC_7dOb_4dAd_vs_Msc","logFC_7dAd_4dOb_vs_Msc", "logFC_7dOb_4dAd_vs_7dOb","logFC_7dAd_4dOb_vs_7dAd","logFC_3dAd_4dOb_vs_3dAd","logFC_3dOb_4dAd_vs_3dOb","logFC_3dAd_4dOb_4dAd_vs_3dAd_4dOb","logFC_3dOb_4dAd_4dOb_vs_3dOb_4dAd")
+                          "logFC_7dOb_4dAd_vs_Msc","logFC_7dAd_4dOb_vs_Msc", "logFC_7dOb_4dAd_vs_7dOb","logFC_7dAd_4dOb_vs_7dAd","logFC_7dOb_4dAd_vs_3dAd")
 
 #Changing NA values into 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_14dOb_vs_Msc), "pval_14dOb_vs_Msc"] <- 1
@@ -211,11 +202,8 @@ RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_4dAd_vs_Msc), "pval_3dAd_4dOb_4dA
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_Msc), "pval_7dOb_4dAd_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dAd_4dOb_vs_Msc), "pval_7dAd_4dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_7dOb), "pval_7dOb_4dAd_vs_7dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$pval_7dOb_4dAd_vs_3dAd), "pval_7dOb_4dAd_vs_3dAd"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$pval_7dAd_4dOb_vs_7dAd), "pval_7dAd_4dOb_vs_7dAd"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_vs_3dAd), "pval_3dAd_4dOb_vs_3dAd"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$pval_3dOb_4dAd_vs_3dOb), "pval_3dOb_4dAd_vs_3dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb), "pval_3dAd_4dOb_4dAd_vs_3dAd_4dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd), "pval_3dOb_4dAd_4dOb_vs_3dOb_4dAd"] <- 1
 
 RNA_tbl[!complete.cases(RNA_tbl$padj_14dOb_vs_Msc), "padj_14dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_vs_Msc), "padj_7dOb_vs_Msc"] <- 1
@@ -234,12 +222,9 @@ RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_4dAd_vs_Msc), "padj_3dAd_4dOb_4dA
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_Msc), "padj_7dOb_4dAd_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dAd_4dOb_vs_Msc), "padj_7dAd_4dOb_vs_Msc"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_7dOb), "padj_7dOb_4dAd_vs_7dOb"] <- 1
+RNA_tbl[!complete.cases(RNA_tbl$padj_7dOb_4dAd_vs_3dAd), "padj_7dOb_4dAd_vs_3dAd"] <- 1
 RNA_tbl[!complete.cases(RNA_tbl$padj_7dAd_4dOb_vs_7dAd), "padj_7dAd_4dOb_vs_7dAd"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_vs_3dAd), "padj_3dAd_4dOb_vs_3dAd"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$padj_3dOb_4dAd_vs_3dOb), "padj_3dOb_4dAd_vs_3dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb), "padj_3dAd_4dOb_4dAd_vs_3dAd_4dOb"] <- 1
-RNA_tbl[!complete.cases(RNA_tbl$padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd), "padj_3dOb_4dAd_4dOb_vs_3dOb_4dAd"] <- 1
-#saveRDS(RNA_tbl, "RNA_tbl.Rds")
+#saveRDS(RNA_tbl, "RNA_tbl3.Rds")
 
   ### scRNA RNA seq seurat object
 ## Import count objects generated using zUMIs
@@ -939,18 +924,182 @@ Dataset_seurat <- FindClusters(Dataset_seurat, resolution = 0.05, algorithm = 3)
 
 
 
+### Grouping of genes based on their induction levels upon changing differentiation cocktail, focusing on 3 days normal differentiation and adding 4 days of the opposite cocktail
+
+# kmeans clustering with transparant colors for publication graph, make many clusters and group them later manually
+addTrans <- function(color,trans)
+{
+  # This function adds transparancy to a color.
+  # Define transparancy with an integer between 0 and 255
+  # 0 being fully transparant and 255 being fully visable
+  # Works with either color and trans a vector of equal length,
+  # or one of the two of length 1.
+  
+  if (length(color)!=length(trans)&!any(c(length(color),length(trans))==1)) stop("Vector lengths not correct")
+  if (length(color)==1 & length(trans)>1) color <- rep(color,length(trans))
+  if (length(trans)==1 & length(color)>1) trans <- rep(trans,length(color))
+  
+  num2hex <- function(x)
+  {
+    hex <- unlist(strsplit("0123456789ABCDEF",split=""))
+    return(paste(hex[(x-x%%16)/16+1],hex[x%%16+1],sep=""))
+  }
+  rgb <- rbind(col2rgb(color),trans)
+  res <- paste("#",apply(apply(rgb,2,num2hex),2,paste,collapse=""),sep="")
+  return(res)
+}
+
+# Load bulk RNA-seq data
+dds_mrg <- readRDS("dds_mrg.Rds")
+RNA_tbl <- readRDS("RNA_tbl.Rds")
+
+# Get rlog values
+tmp <- data.frame(assay(rlogTransformation(dds_mrg, blind = FALSE)))
 
 
+### First adipocyte differentiation day 3
+# Select genes regulated at day 3 of adipogenic differentiation
+genes_spec <- rbind(
+  RNA_tbl[(RNA_tbl$padj_3dAd_vs_Msc < 0.01 & RNA_tbl$logFC_3dAd_vs_Msc < 0) & (RNA_tbl$padj_3dOb_vs_Msc > 0.05 | (RNA_tbl$padj_3dOb_vs_Msc < 0.05 & RNA_tbl$logFC_3dOb_vs_Msc > 0)),],
+  RNA_tbl[(RNA_tbl$padj_3dAd_vs_Msc < 0.01 & RNA_tbl$logFC_3dAd_vs_Msc > 0) & (RNA_tbl$padj_3dOb_vs_Msc > 0.05 | (RNA_tbl$padj_3dOb_vs_Msc < 0.05 & RNA_tbl$logFC_3dOb_vs_Msc < 0)),])
+genes <- RNA_tbl[RNA_tbl$padj_3dAd_vs_Msc < 0.01,]
 
 
+# Select samples (3dOb, Msc, 3dAd,  3dOb+4dAd)
+tmp2 <- tmp[genes$RefSeqID,c("Msc_1","Msc_2","Msc_3","X3dAd_1","X3dAd_2","X3dAd_3","X3dOb_4dAd_1","X3dOb_4dAd_2")]
+
+# average 3dAd and 3dOb + 4dAd
+tmp2$Msc <- rowMeans(tmp2[,c("Msc_1","Msc_2","Msc_3")], na.rm = TRUE)
+tmp2$Ad3d <- rowMeans(tmp2[,c("X3dAd_1","X3dAd_2","X3dAd_3")], na.rm = TRUE)
+tmp2$Ob3d_Ad4d <- rowMeans(tmp2[,c("X3dOb_4dAd_1","X3dOb_4dAd_2")], na.rm = TRUE)
+
+# Determine 12 clusters # This step is non-deterministic and needs to be done again
+no.cluster <- 12
+y <- as.matrix(t(scale(t(tmp2[,c("Msc","Ad3d","Ob3d_Ad4d")]))))
+rownames(y) <- rownames(tmp2)
+km <- kmeans(y, no.cluster, iter.max=60)
+
+library(RColorBrewer)
+library(scales)
+par(mfrow=c(3,4),pty='s')
+
+# Plot cluster patterns
+for(i in 1:no.cluster) {
+  tmp1 <- y[km$cluster == i,1:3]
+  Mycol <- addTrans(rainbow(no.cluster)[i],255*20 / dim(tmp1)[1])
+  plot(0,0,pch=' ', xlim=c(1,3), ylim=c(-1.5,1.5), xlab="", ylab="", yaxt="n", xaxt="n", main=paste(dim(tmp1)[1]))
+  mtext("scaled Signal", side=2, line=2.5, cex=0.5)
+  for(j in 1:dim(tmp1)[1]){
+    lines(c(1:3), tmp1[j,], col=Mycol)
+  }
+  lines(c(1:3), apply(tmp1,2, function(x){median(x,na.rm=T)}), lwd=3)
+  axis(2, at=c(-1,0,1), lab=c(-1,0,1), cex.axis=1)
+  axis(1, at=c(1:3), lab=c("Msc","3dAd","3dOb_4dAd"), las=2)
+}
+
+# Combine clusters into three patterns (similar, less, and more induced)
+y <- data.frame(cbind(y,km$cluster))
+names(y)[4] <- 'cluster'
+y$RefSeqID <- rownames(y)
+
+# Order and group the clusters into 8 major patterns
+y$clust_3dAd <- NA
+y[y$cluster==1,'clust_3dAd'] <- "Rep_similar"
+y[y$cluster==2,'clust_3dAd'] <- "Rep_more"
+y[y$cluster==3,'clust_3dAd'] <- "Rep_less"
+y[y$cluster==4,'clust_3dAd'] <- "Ind_less"
+y[y$cluster==5,'clust_3dAd'] <- "Ind_less"
+y[y$cluster==6,'clust_3dAd'] <- "Ind_less"
+y[y$cluster==7,'clust_3dAd'] <- "Ind_similar"
+y[y$cluster==8,'clust_3dAd'] <- "Rep_less"
+y[y$cluster==9,'clust_3dAd'] <- "Ind_similar"
+y[y$cluster==10,'clust_3dAd'] <- "Ind_similar"
+y[y$cluster==11,'clust_3dAd'] <- "Ind_more"
+y[y$cluster==12,'clust_3dAd'] <- "Ind_more"
+
+y$Spec <- "Common"
+y[y$RefSeqID %in% genes_spec$RefSeqID,"Spec"] <- "Spec"
+y$clust_3dAd <- paste(y$Spec,y$clust_3dAd,sep="_")
+y$clust_3dAd <- factor(y$clust_3dAd,levels=c("Spec_Ind_more","Spec_Ind_similar","Spec_Ind_less","Spec_Rep_more","Spec_Rep_similar","Spec_Rep_less",
+                                             "Common_Ind_more","Common_Ind_similar","Common_Ind_less","Common_Rep_more","Common_Rep_similar","Common_Rep_less"))
+
+# Combine genes with clustering in RNA_tbl
+RNA_tbl <- merge(RNA_tbl,y[,c("RefSeqID","clust_3dAd")], by="RefSeqID", all.x=T)
+# Adding a "none" for the ones not clustered
+RNA_tbl$clust_3dAd <- factor(RNA_tbl$clust_3dAd, levels = c(levels(RNA_tbl$clust_3dAd), "none"))
+RNA_tbl[is.na(RNA_tbl$clust_3dAd), "clust_3dAd"] <- "none"
 
 
+### Second osteoblast differentiation day 3
+# Select genes regulated at day 3 of osteogenic differentiation
+genes_spec <- rbind(
+  RNA_tbl[(RNA_tbl$padj_3dOb_vs_Msc < 0.01 & RNA_tbl$logFC_3dOb_vs_Msc < 0) & (RNA_tbl$padj_3dAd_vs_Msc > 0.05 | (RNA_tbl$padj_3dAd_vs_Msc < 0.05 & RNA_tbl$logFC_3dAd_vs_Msc > 0)),],
+  RNA_tbl[(RNA_tbl$padj_3dOb_vs_Msc < 0.01 & RNA_tbl$logFC_3dOb_vs_Msc > 0) & (RNA_tbl$padj_3dAd_vs_Msc > 0.05 | (RNA_tbl$padj_3dAd_vs_Msc < 0.05 & RNA_tbl$logFC_3dAd_vs_Msc < 0)),])
+genes <- RNA_tbl[RNA_tbl$padj_3dOb_vs_Msc < 0.01,]
 
+# Select samples (3dOb, Msc, 3dAd,  3dOb+4dAd)
+tmp2 <- tmp[genes$RefSeqID,c("Msc_1","Msc_2","Msc_3","X3dOb_1","X3dOb_2","X3dOb_3","X3dAd_4dOb_1","X3dAd_4dOb_2")]
 
+# average 3dOb and 3dAd + 4dOb
+tmp2$Msc <- rowMeans(tmp2[,c("Msc_1","Msc_2","Msc_3")], na.rm = TRUE)
+tmp2$Ob3d <- rowMeans(tmp2[,c("X3dOb_1","X3dOb_2","X3dOb_3")], na.rm = TRUE)
+tmp2$Ad3d_Ob4d <- rowMeans(tmp2[,c("X3dAd_4dOb_1","X3dAd_4dOb_2")], na.rm = TRUE)
 
+# Determine 12 clusters # This step is non-deterministic and needs to be done again
+no.cluster <- 12
+y <- as.matrix(t(scale(t(tmp2[,c("Msc","Ob3d","Ad3d_Ob4d")]))))
+rownames(y) <- rownames(tmp2)
+km <- kmeans(y, no.cluster, iter.max=60)
 
+library(RColorBrewer)
+library(scales)
+par(mfrow=c(3,4),pty='s')
 
+# Plot cluster patterns
+for(i in 1:no.cluster) {
+  tmp1 <- y[km$cluster == i,1:3]
+  Mycol <- addTrans(rainbow(no.cluster)[i],255*10 / dim(tmp1)[1])
+  plot(0,0,pch=' ', xlim=c(1,3), ylim=c(-1.5,1.5), xlab="", ylab="", yaxt="n", xaxt="n", main=paste(dim(tmp1)[1]))
+  mtext("scaled Signal", side=2, line=2.5, cex=0.5)
+  for(j in 1:dim(tmp1)[1]){
+    lines(c(1:3), tmp1[j,], col=Mycol)
+  }
+  lines(c(1:3), apply(tmp1,2, function(x){median(x,na.rm=T)}), lwd=3)
+  axis(2, at=c(-1,0,1), lab=c(-1,0,1), cex.axis=1)
+  axis(1, at=c(1:3), lab=c("Msc","3dOb","3dAd_4dOb"), las=2)
+}
 
+# Combine clusters into three patterns (similar, less, and more induced)
+y <- data.frame(cbind(y,km$cluster))
+names(y)[4] <- 'cluster'
+y$RefSeqID <- rownames(y)
 
+# Order and group the clusters into 8 major patterns
+y$clust_3dOb <- NA
+y[y$cluster==1,'clust_3dOb'] <- "Rep_more"
+y[y$cluster==2,'clust_3dOb'] <- "Ind_less"
+y[y$cluster==3,'clust_3dOb'] <- "Ind_less"
+y[y$cluster==4,'clust_3dOb'] <- "Rep_less"
+y[y$cluster==5,'clust_3dOb'] <- "Ind_less"
+y[y$cluster==6,'clust_3dOb'] <- "Rep_more"
+y[y$cluster==7,'clust_3dOb'] <- "Rep_less"
+y[y$cluster==8,'clust_3dOb'] <- "Rep_less"
+y[y$cluster==9,'clust_3dOb'] <- "Ind_more"
+y[y$cluster==10,'clust_3dOb'] <- "Rep_less"
+y[y$cluster==11,'clust_3dOb'] <- "Rep_similar"
+y[y$cluster==12,'clust_3dOb'] <- "Ind_similar"
 
+y$Spec <- "Common"
+y[y$RefSeqID %in% genes_spec$RefSeqID,"Spec"] <- "Spec"
+y$clust_3dOb <- paste(y$Spec,y$clust_3dOb,sep="_")
+y$clust_3dOb <- factor(y$clust_3dOb,levels=c("Spec_Ind_more","Spec_Ind_similar","Spec_Ind_less","Spec_Rep_more","Spec_Rep_similar","Spec_Rep_less",
+                                             "Common_Ind_more","Common_Ind_similar","Common_Ind_less","Common_Rep_more","Common_Rep_similar","Common_Rep_less"))
+
+# Combine genes with clustering in RNA_tbl
+RNA_tbl <- merge(RNA_tbl,y[,c("RefSeqID","clust_3dOb")], by="RefSeqID", all.x=T)
+# Adding a "none" for the ones not clustered
+RNA_tbl$clust_3dOb <- factor(RNA_tbl$clust_3dOb, levels = c(levels(RNA_tbl$clust_3dOb), "none"))
+RNA_tbl[is.na(RNA_tbl$clust_3dOb), "clust_3dOb"] <- "none"
+
+saveRDS(RNA_tbl,file = "RNA_tbl.Rds")
 
